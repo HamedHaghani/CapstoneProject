@@ -1,0 +1,127 @@
+.custom-add-employee-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: #f9f9f9;
+}
+
+.custom-header {
+  flex-shrink: 0;
+}
+
+.custom-title {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.custom-employee-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+  width: 100%;
+  max-width: 900px;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+.custom-form-scroll-container {
+  max-height: 80vh; /* Adjust the height as needed */
+  overflow-y: auto;
+}
+
+.custom-form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.custom-form-grid label {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.2rem;
+  gap: 10px;
+  color: #555;
+}
+
+input,
+select {
+  padding: 12px;
+  font-size: 1.2rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fdfdfd;
+  transition: border-color 0.3s ease;
+}
+
+input:focus,
+select:focus {
+  border-color: #4caf50;
+  outline: none;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+.custom-button-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  align-self: flex-end;
+}
+.custom-submit-button {
+  font-size: 1.5rem;
+  padding: 15px 20px;
+  width: 100%;
+  border-radius: 8px;
+}
+
+.custom-submit-button {
+  padding: 15px 25px;
+  font-size: 1.2rem;
+  color: white;
+  background-color: #4caf50;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.custom-submit-button:hover {
+  background-color: #45a049;
+}
+
+.custom-back-button {
+  padding: 15px 25px;
+  font-size: 1.2rem;
+  color: white;
+  background-color: #555;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.custom-back-button:hover {
+  background-color: #444;
+}
+
+/* Style for a larger checkbox */
+.custom-checkbox {
+  width: 25px;
+  height: 25px;
+  transform: scale(1.5); /* Scales the checkbox */
+  margin: 5px; /* Adds some spacing around */
+  cursor: pointer; /* Changes cursor to pointer on hover */
+}
+
+.ismanager {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+}

@@ -1,0 +1,21 @@
+.back-button-bottom svg {
+  font-size: 1.2rem; /* Slightly larger icon */
+}
+
+.back-button-bottom {
+  font-size: 1.5rem;
+  padding: 15px 20px;
+  border-radius: 8px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+}
+
+.back-button-bottom:hover {
+  background-color: #d32f2f;
+}

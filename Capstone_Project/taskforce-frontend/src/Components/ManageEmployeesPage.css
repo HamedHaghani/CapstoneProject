@@ -1,0 +1,77 @@
+.manage-employees-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 20px;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.options-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.option-button {
+  font-size: 1.5rem;
+  padding: 15px 20px;
+  border-radius: 8px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  text-align: center;
+}
+
+.option-button:hover {
+  background-color: #45a049;
+}
+
+.manage-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  box-sizing: border-box;
+  height: 80vh; /* Adjusted height */
+}
+
+.manage-title {
+  font-size: 2.5rem; /* Larger title */
+  margin-bottom: 40px; /* Spaced from options */
+  color: #333;
+}
+
+.manage-options {
+  display: flex;
+  flex-direction: column;
+
+  flex-wrap: wrap; /* Allows buttons to wrap if needed */
+  gap: 20px; /* Increased spacing between buttons */
+  justify-content: center;
+  margin-top: 3rem; /* Space above back button */
+
+  margin-bottom: 30px; /* Space above back button */
+}
+
+.manage-button {
+  font-size: 1.7rem; /* Slightly smaller font for better spacing */
+  padding: 15px 25px; /* Balanced button size */
+  border-radius: 8px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.manage-button:hover {
+  background-color: #45a049;
+}

@@ -1,0 +1,102 @@
+.pin-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  height: 100vh; /* Ensure the page takes up the full height of the screen */
+  background-color: #f4f4f4; /* Light background for a cleaner look */
+}
+
+.pin-display {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  width: 18%; /* Set a fixed width */
+  height: 40px; /* Set a height to make it look more consistent */
+  text-align: center;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #fff;
+}
+
+.number-pad {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.number-btn,
+.delete-btn,
+.submit-btn,
+.back-btn {
+  font-size: 1.5rem;
+  padding: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.3s ease-in-out;
+}
+
+.number-btn {
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.number-btn:hover {
+  background-color: #f1f1f1;
+}
+
+.delete-btn {
+  background-color: #f44336;
+  color: white;
+}
+
+.delete-btn:hover {
+  background-color: #d32f2f;
+}
+
+.submit-btn {
+  background-color: #4caf50;
+  color: white;
+  margin-top: 10px;
+  width: 20%;
+  border-radius: 25px;
+}
+
+.submit-btn:hover {
+  background-color: #45a049;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 10px;
+  align-items: center;
+}
+
+.back-btn {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.back-btn:hover {
+  background-color: #45a049;
+}
+
+.back-btn svg {
+  font-size: 1.2rem; /* Slightly larger icon */
+}

@@ -1,0 +1,38 @@
+.employee-schedules-page {
+    padding: 20px;
+  }
+  
+  .schedules-container {
+    margin-top: 20px;
+  }
+  
+  .schedules-list {
+    margin-top: 10px;
+  }
+  
+  .schedule-item {
+    padding: 10px;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+  }
+  
+  .schedule-item p {
+    margin: 5px 0;
+  }
+  
+  .schedule-item strong {
+    font-weight: bold;
+  }
+  
+  .error {
+    color: red;
+    text-align: center;
+  }
+  
+  .employee-not-found h2 {
+    color: red;
+    text-align: center;
+  }
+  

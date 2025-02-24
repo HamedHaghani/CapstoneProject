@@ -1,0 +1,132 @@
+.employee-list-page {
+  display: flex;
+  flex-direction: column;
+  padding: 30px;
+  max-width: 1000px;
+  margin: auto;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f4f7fc;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.employee-list-page h1 {
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 32px;
+  color: #333;
+  font-weight: 600;
+}
+
+.search-bar {
+  margin: auto;
+  padding: 20px;
+  width: 800px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.search-bar:focus {
+  border-color: #007bff;
+}
+
+.employee-cards-container {
+  margin: auto;
+  display: flex;
+  align-items: center;
+  height: 600px;
+  gap: 20px;
+}
+
+.employee-cards {
+  width: 900px;
+  gap: 20px;
+}
+
+.employee-card {
+  align-self: center;
+  margin-left: 40px;
+  margin-bottom: 10px;
+}
+
+.employee-card.expanded {
+  background-color: #f9f9f9;
+  border-color: #ddd;
+}
+
+.employee-card-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.employee-card-details {
+  margin-top: 20px;
+  font-size: 16px;
+  color: #666;
+}
+
+.employee-card-details .property-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.employee-card-details .property-row span {
+  font-weight: bold;
+  color: #444;
+}
+
+.employee-card-details .property-row div {
+  flex: 1;
+  text-align: right;
+}
+
+.action-button {
+  margin-top: 15px;
+  padding: 12px 20px;
+  font-size: 16px;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.action-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-3px);
+}
+
+.action-button:active {
+  transform: translateY(0);
+}
+
+.employee-card-details {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Adjust spacing between rows */
+}
+
+.property-row {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* Add space between label and value */
+}
+
+.property-row .gray-row {
+  background-color: #f0f0f0; /* Adjust background for alternating rows */
+}
+
+.property-row span {
+  font-weight: bold; /* Make labels bold */
+}

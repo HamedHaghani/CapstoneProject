@@ -1,0 +1,117 @@
+.employee-schedule-page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Full height of the viewport */
+}
+
+.schedule-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+.schedule-search {
+  margin-left: 2rem;
+}
+
+.schedule-list {
+  flex: 1;
+  max-width: 50%; /* Ensures the left side takes up 50% of the screen */
+  overflow-y: auto; /* Enable vertical scrolling */
+  padding-right: 1rem; /* Space for scrollbar */
+  margin-right: 10px;
+}
+
+.schedule-form {
+  flex: 1;
+  max-width: 50%; /* Ensures the right side takes up 50% of the screen */
+  padding: 1rem;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-height: 80vh; /* Optional: restrict height of the form */
+  overflow-y: auto; /* Allows the form to scroll if needed */
+}
+
+.schedule-form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.schedule-form input[type="text"],
+.schedule-form input[type="number"],
+.schedule-form input[type="date"],
+.schedule-form input[type="time"] {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  box-sizing: border-box;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.schedule-form button {
+  width: 100%;
+  padding: 10px;
+  margin-top: 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.schedule-form button:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+}
+
+.schedule-form button:active {
+  background-color: #003d7a;
+  transform: translateY(0);
+}
+
+.schedule-item {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.schedule-item p {
+  margin: 5px 0;
+}
+.schedules {
+  margin-bottom: 10rem;
+}
+
+.schedule-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.schedule-buttons button {
+  padding: 5px 15px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.schedule-buttons button:hover {
+  background-color: #218838;
+  transform: translateY(-2px);
+}
+
+.schedule-buttons button:active {
+  background-color: #1e7e34;
+  transform: translateY(0);
+}
+
+.no-schedules {
+  color: #888;
+  text-align: center;
+  padding: 20px;
+}

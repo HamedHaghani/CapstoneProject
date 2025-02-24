@@ -1,0 +1,62 @@
+.employee-details-page {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+  border-radius: 12px;
+  background: #f8f9fa;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  font-family: Arial, sans-serif;
+}
+
+.employee-details-page h2 {
+  text-align: center;
+  color: #343a40;
+  margin-bottom: 20px;
+}
+
+.details-container {
+  padding: 15px;
+  border-radius: 8px;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.details-container p {
+  font-size: 16px;
+  padding: 8px 0;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.details-container p:last-child {
+  border-bottom: none;
+}
+
+.details-container strong {
+  color: #495057;
+}
+
+.error {
+  text-align: center;
+  color: red;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
+.back-button {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: 20px;
+  padding: 10px;
+  background: #007bff;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.back-button:hover {
+  background: #0056b3;
+}

@@ -1,0 +1,28 @@
+.language-picker-container-bottom select {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  border-radius: 25px;
+  font-size: 1rem;
+  color: #333;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border 0.3s ease;
+}
+
+.language-picker-container-bottom select:hover {
+  background-color: #f1f1f1;
+  border-color: #4caf50;
+}
+
+.language-picker-container-bottom {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.employee-cards-container {
+  max-height: 500px; /* Adjust based on your page's height */
+  overflow-y: auto; /* Makes the container scrollable */
+  padding-right: 20px; /* To avoid scrollbar overlap with card content */
+}
