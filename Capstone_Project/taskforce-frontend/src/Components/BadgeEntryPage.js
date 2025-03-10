@@ -1,6 +1,3 @@
-
-
-// export default BadgeEntryPage;
 import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { GetLabel } from "../LanguageManager";
@@ -8,8 +5,7 @@ import { BackButton } from "./BackButton";
 import { FaCheckCircle, FaTimesCircle } from "react-icons/fa";
 import "./BadgeEntryPage.css";
 
-const shiftActions = ["startShift", "endShift", "startBreak", "endBreak"];
-const viewActions = ["viewPayments", "viewProfile", "viewSchedules"];
+const API_URL = "http://localhost:8080/api/shifts"; // Backend API base URL
 
 const BadgeEntryPage = () => {
   const navigate = useNavigate();
@@ -20,17 +16,56 @@ const BadgeEntryPage = () => {
 
   const [badge, setBadge] = useState("");
   const [responseType, setResponseType] = useState(null);
+  const [responseMessage, setResponseMessage] = useState("");
 
-  const handleBadgeSubmit = () => {
-    if (!badge) return;
+  // Mapping actions to backend endpoints
+  const shiftActions = {
+    startShift: "/start",
+    endShift: "/end",
+    startBreak: "/start-break",
+    endBreak: "/end-break",
+  };
 
-    if (viewActions.includes(action)) {
-      navigate(`/employee-${action}?badge=${badge}&culture=${currentCulture}`);
+  // Function to handle API calls based on badge number and action
+  const handleBadgeSubmit = async () => {
+    if (!badge) {
+      setResponseMessage("Please enter your badge number first! ❌");
+      setResponseType("bad");
       return;
     }
 
-    const response = badge === "1234" ? "good_punch" : "bad_punch";
-    setResponseType(response === "good_punch" ? "good" : "bad");
+    // Check if the action is valid
+    const endpoint = shiftActions[action];
+    if (!endpoint) {
+      setResponseMessage("Invalid action selected ❌");
+      setResponseType("bad");
+      return;
+    }
+
+    try {
+      const response = await fetch(`${API_URL}${endpoint}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ badgeNumber: badge }),
+      });
+
+      if (!response.ok) {
+        throw new Error(await response.text());
+      }
+
+      // Success response
+      setResponseType("good");
+      setResponseMessage(
+        `${GetLabel("Labels.function.punchAccepted", currentCulture)}: ${GetLabel(
+          "Labels.function." + action,
+          currentCulture
+        )}`
+      );
+    } catch (error) {
+      console.error("API Error:", error);
+      setResponseType("bad");
+      setResponseMessage(error.message || "An error occurred ❌");
+    }
   };
 
   const handleNumberClick = (num) => {
@@ -48,20 +83,12 @@ const BadgeEntryPage = () => {
 
       <div className="number-pad">
         {[1, 2, 3, 4, 5, 6, 7, 8, 9, 0].map((item) => (
-          <button
-            key={item}
-            className="number-btn"
-            onClick={() => handleNumberClick(item)}
-          >
+          <button key={item} className="number-btn" onClick={() => handleNumberClick(item)}>
             {item}
           </button>
         ))}
-        <button className="clear-btn" onClick={handleClear}>
-          C
-        </button>
-        <button className="backspace-btn" onClick={handleBackspace}>
-          &#9003;
-        </button>
+        <button className="clear-btn" onClick={handleClear}>C</button>
+        <button className="backspace-btn" onClick={handleBackspace}>&#9003;</button>
       </div>
 
       <button className="submit-btn" onClick={handleBadgeSubmit}>
@@ -76,17 +103,7 @@ const BadgeEntryPage = () => {
             ) : (
               <FaTimesCircle className="modal-icon error" />
             )}
-            <p>
-              {responseType === "good"
-                ? `${GetLabel(
-                    "Labels.function.punchAccepted",
-                    currentCulture
-                  )}: ${GetLabel("Labels.function." + action, currentCulture)}`
-                : `${GetLabel(
-                    "Labels.function.punchRejected",
-                    currentCulture
-                  )}: ${GetLabel("Labels.function." + action, currentCulture)}`}
-            </p>
+            <p>{responseMessage}</p>
             <button className="close-btn" onClick={closeModal}>
               {GetLabel("Labels.function.close", currentCulture)}
             </button>
@@ -94,10 +111,7 @@ const BadgeEntryPage = () => {
         </div>
       )}
 
-      <BackButton
-        handleBackButton={() => navigate("/")}
-        currentCulture={currentCulture}
-      />
+      <BackButton handleBackButton={() => navigate("/")} currentCulture={currentCulture} />
     </div>
   );
 };

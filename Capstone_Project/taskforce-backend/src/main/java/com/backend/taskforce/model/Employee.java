@@ -143,7 +143,8 @@ public class Employee {
     private String jobRole;
     private String location;
     private boolean isManager;
-    private boolean isUnassigned = false;
+    @Column(nullable = false, columnDefinition = "BOOLEAN DEFAULT FALSE")
+    private boolean isUnassigned;
     private String managerPin;
     private String name;
 
