@@ -13,7 +13,8 @@ import WorkedHoursPage from "./Components/WorkedHoursPage";
 import EmployeeSchedulePage from "./Components/EmployeeSchedulePage";
 import BadgeEntryPage from "./Components/BadgeEntryPage"; // Import BadgeEntryPage
 import EmployeeDetailsPage from "./Components/EmployeeDetailsPage"; // Import BadgeEntryPage
-import EmployeeSchedulesPage from "./Components/EmployeeSchedulesPage"; // Import BadgeEntryPage
+import EmployeeSchedulesPage from "./Components/EmployeeSchedulesPage";
+import EmployeePaymentsPage from "./Components/EmployeePaymentsPage";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path: "/manage-employees",
     element: <ManageEmployeesPage />,
+  },
+  {
+    path: "/employee-payments",
+    element: <EmployeePaymentsPage />, // ✅ Ensure this route exists!
   },
   {
     path: "/add-employee",
