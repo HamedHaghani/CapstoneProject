@@ -28,20 +28,19 @@ const BadgeEntryPage = () => {
 
   const [badge, setBadge] = useState("");
 
-  // Function to handle API calls based on badge number and action
   const handleBadgeSubmit = async () => {
     if (!badge) {
       alert("Please enter your badge number first!");
       return;
     }
 
+    // 🔍 Redirect for view actions
     if (viewActions[action]) {
-      // ✅ Corrected: Redirecting to the correct path with badgeNumber and culture
       navigate(`${viewActions[action]}?badge=${badge}&culture=${currentCulture}`);
       return;
     }
 
-    // Handle shift-related actions (Start Shift, End Shift, etc.)
+    // 🔧 Handle shift actions
     let endpoint = shiftActions[action];
     if (!endpoint) {
       alert("Invalid action selected.");
@@ -56,10 +55,10 @@ const BadgeEntryPage = () => {
       });
 
       if (!response.ok) {
-        throw new Error(await response.text());
+        const errorText = await response.text();
+        throw new Error(errorText);
       }
 
-      // ✅ Added alert confirmation after successful shift punch
       alert(
         `${GetLabel("Labels.function.punchAccepted", currentCulture)}: ${GetLabel(
           "Labels.function." + action,
@@ -67,8 +66,20 @@ const BadgeEntryPage = () => {
         )}`
       );
     } catch (error) {
+      const message = error.message;
+
+      // ✅ Custom schedule-based alerts
+      if (message.includes("not scheduled")) {
+        alert("⛔ You are not scheduled to work at this time. Please check with your manager.");
+      } else if (message.includes("No active shift")) {
+        alert("❌ You must start a shift before performing this action.");
+      } else if (message.includes("Break")) {
+        alert("⚠️ Break error: " + message);
+      } else {
+        alert(message || "An unexpected error occurred");
+      }
+
       console.error("API Error:", error);
-      alert(error.message || "An error occurred");
     }
   };
 

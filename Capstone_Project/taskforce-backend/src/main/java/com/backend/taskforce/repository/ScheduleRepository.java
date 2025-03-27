@@ -9,7 +9,11 @@ import java.util.List;
 @Repository
 public interface ScheduleRepository extends JpaRepository<Schedule, Long> {
 
-    // Custom query method to find schedules by employee ID
+    // Find all schedules for the employee
     List<Schedule> findByEmployeeId(Long employeeId);
-}
 
+    // ✅ Modified to use Strings instead of LocalDate/LocalTime
+    List<Schedule> findByEmployeeIdAndStartDateAndStartTimeLessThanEqualAndEndTimeGreaterThanEqual(
+            Long employeeId, String startDate, String currentTime1, String currentTime2
+    );
+}

@@ -43,7 +43,7 @@ const ManagerPage = () => {
     {
       name: "Labels.function.viewPayments",
       icon: <FaMoneyBill />,
-      route: `/view-payments?culture=${currentCulture}`,
+      route: `/manage-payment?action=payment&culture=${currentCulture}`,
     },
     {
       name: "Labels.function.hoursWorked",
@@ -58,12 +58,12 @@ const ManagerPage = () => {
     {
       name: "Labels.function.PastPunches",
       icon: <FaUser />,
-      route: `/view-profile?culture=${currentCulture}`,
+      route: `/employee-punch-list?action=punches&culture=${currentCulture}`,
     },
     {
       name: "Labels.function.settings",
       icon: <FaTools />,
-      route: `/settings?culture=${currentCulture}`,
+      route: `/config-page?culture=${currentCulture}`,
     },
   ];
 

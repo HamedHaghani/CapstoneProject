@@ -18,4 +18,7 @@ public interface ShiftRepository extends JpaRepository<Shift, Long> {
     List<Shift> findByEmployee_BadgeNumberIgnoreCaseAndStartTimeBetween(
             String badgeNumber, LocalDateTime startTime, LocalDateTime endTime
     );
+
+    List<Shift> findByEmployee_BadgeNumberIgnoreCase(String badgeNumber);
+
 }

@@ -31,6 +31,10 @@ export default {
       close: "Close",
       employeeDetails: "Your Profile",
       employeeNotFound: " Employee With Badge = ${1} Not Found",
+      managePayment: " View Payment",
+      configuration: "Configuration",
+      workedHours: "View Worked Hours",
+      employeePunches: "View Punches"
     },
     form: {
       workedHours: "Worked Hours Current Pay Period",
@@ -61,6 +65,12 @@ export default {
       salary: "Salary",
       dateOfBirth: "Date Of Birth",
       address: "Address",
+      role: "Role",
+      payPeriodStartDate: "Start of pay period",
+      scheduleType: "Pay period schedule",
+      selectSchedule: "selectSchedule",
+      selectPayPeriod: "Select the Pay range  ",
+      taxRate: "Tax Rate (0 to 1)"
     },
     pin: {
       enterPin: "Enter PIN",
@@ -69,9 +79,11 @@ export default {
     button: {
       submit: "Submit",
       back: "Back",
+      save: "Save"
     },
     page: {
       manager: "Manager Page",
+      workedHours: "Worked Hours"
     },
     error: {
       serverError: "Server error. Please try again.",

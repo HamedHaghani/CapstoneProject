@@ -15,6 +15,11 @@ import BadgeEntryPage from "./Components/BadgeEntryPage"; // Import BadgeEntryPa
 import EmployeeDetailsPage from "./Components/EmployeeDetailsPage"; // Import BadgeEntryPage
 import EmployeeSchedulesPage from "./Components/EmployeeSchedulesPage";
 import EmployeePaymentsPage from "./Components/EmployeePaymentsPage";
+import ManageEmployeePayment from "./Components/ManageEmployeePayment";
+import ManageEmployeePaymentView from "./Components/ManageEmployeePaymentView";
+import ConfigPage from "./Components/ConfigurationPage";
+import EmployeePunchesList from "./Components/EmployeePunchesList"
+import EmployeePunches from "./Components/EmployeePunches"
 
 const router = createBrowserRouter([
   {
@@ -72,6 +77,26 @@ const router = createBrowserRouter([
   {
     path: "/employee-viewSchedules",
     element: <EmployeeSchedulesPage />,
+  },
+  {
+    path: "/manage-payment",
+    element: <ManageEmployeePayment />,
+  },
+  {
+    path: "/manage-payment-view",
+    element: <ManageEmployeePaymentView />,
+  },
+  {
+    path: "/config-page",
+    element: <ConfigPage />,
+  },
+  {
+    path: "/employee-punch-list",
+    element: <EmployeePunchesList />,
+  },
+  {
+    path: "/employee-punch",
+    element: <EmployeePunches />,
   },
 ]);
 

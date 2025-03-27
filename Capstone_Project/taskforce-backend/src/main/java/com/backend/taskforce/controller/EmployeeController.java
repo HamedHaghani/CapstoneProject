@@ -72,10 +72,24 @@ public class EmployeeController {
         return ResponseEntity.ok(paymentDetails);
     }
 
+    @GetMapping("/payments/{badgeNumber}/{payPeriod}")
+    public ResponseEntity<Map<String, Object>> getEmployeePaymentsCezar(
+            @PathVariable String badgeNumber,
+            @PathVariable String payPeriod) { // 👈 Accept payPeriod as a path param
+        Map<String, Object> paymentDetails = employeeService.getEmployeePaymentDetailsCezar(badgeNumber, payPeriod);
+        return ResponseEntity.ok(paymentDetails);
+    }
+
     // ✅ Get Employee Schedules by Badge
     @GetMapping("/schedules/{badgeNumber}")
     public ResponseEntity<List<Schedule>> getEmployeeSchedules(@PathVariable String badgeNumber) {
         List<Schedule> schedules = employeeService.getEmployeeSchedulesByBadge(badgeNumber);
         return ResponseEntity.ok(schedules);
     }
+
+    @GetMapping("/hours/{payPeriod}")
+    public List<Map<String, Object>> getEmployeeWorkedHours(@PathVariable String payPeriod) {
+        return employeeService.getEmployeeWorkedHours(payPeriod);
+    }
+
 }

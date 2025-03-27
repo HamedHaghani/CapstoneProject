@@ -1,0 +1,137 @@
+/* Payment Container */
+.payment-container {
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 30px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
+
+/* Header Styling */
+h2 {
+  color: #2c3e50;
+  margin-bottom: 25px;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+/* Date Selection and Button Styling */
+.date-selection {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ffffff;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 25px;
+}
+
+.date-selection label {
+  font-weight: bold;
+  color: #34495e;
+  font-size: 16px;
+}
+
+.date-selection input {
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  width: 150px;
+}
+
+.date-selection input:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+button {
+  padding: 10px 25px;
+  background-color: #28a745; /* Green color */
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #218838;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Error and Loading Messages */
+.error-message {
+  color: #e74c3c;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+.loading {
+  color: #f39c12;
+  font-size: 16px;
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+/* Payment Details Styling */
+.payment-details {
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.payment-details p {
+  display: flex;
+  justify-content: space-between;
+  padding: 12px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 16px;
+}
+
+.payment-details p:last-child {
+  border-bottom: none;
+}
+
+.payment-details strong {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.payment-details span {
+  color: #7f8c8d;
+  font-weight: 400;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .payment-container {
+    padding: 20px;
+  }
+
+  .date-selection {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .date-selection input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  button {
+    width: 100%;
+  }
+}

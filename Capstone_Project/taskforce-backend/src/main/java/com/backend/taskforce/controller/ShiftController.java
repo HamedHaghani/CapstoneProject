@@ -16,11 +16,16 @@ public class ShiftController {
         this.shiftService = shiftService;
     }
 
-    // ▶️ Start Shift
+    // ▶️ Start Shift (with schedule validation)
     @PostMapping("/start")
     public ResponseEntity<?> startShift(@RequestBody Map<String, String> payload) {
         String badgeNumber = payload.get("badgeNumber");
-        return ResponseEntity.ok(shiftService.startShiftByBadge(badgeNumber));
+        try {
+            Shift shift = shiftService.startShiftByBadge(badgeNumber);
+            return ResponseEntity.ok(shift);
+        } catch (RuntimeException ex) {
+            return ResponseEntity.badRequest().body(Map.of("error", ex.getMessage()));
+        }
     }
 
     // ⏹ End Shift
@@ -42,5 +47,11 @@ public class ShiftController {
     public ResponseEntity<?> endBreak(@RequestBody Map<String, String> payload) {
         String badgeNumber = payload.get("badgeNumber");
         return ResponseEntity.ok(shiftService.endBreakByBadge(badgeNumber));
+    }
+
+    // 📅 Get all shifts for an employee
+    @GetMapping("/employee/{badgeNumber}")
+    public ResponseEntity<?> getShiftsByEmployee(@PathVariable String badgeNumber) {
+        return ResponseEntity.ok(shiftService.getShiftsByEmployeeBadge(badgeNumber));
     }
 }
