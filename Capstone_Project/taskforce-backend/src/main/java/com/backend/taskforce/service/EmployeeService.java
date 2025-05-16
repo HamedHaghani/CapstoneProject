@@ -34,8 +34,43 @@ public class EmployeeService {
     }
 
     public Employee saveEmployee(Employee employee) {
+        if (employee.getBadgeNumber() == null || employee.getBadgeNumber().isEmpty()) {
+            // Generate new badge number
+            String newBadgeNumber = generateNextBadgeNumber();
+            employee.setBadgeNumber(newBadgeNumber);
+        }
         return employeeRepository.save(employee);
     }
+    // 🔢 Generate the next available badge number
+    private String generateNextBadgeNumber() {
+        int nextNumber = 1000; // Starting point for badge numbers
+
+        // Get the highest existing badge number from the database
+        Optional<Employee> latestEmployee = employeeRepository.findTopByOrderByBadgeNumberDesc();
+        if (latestEmployee.isPresent()) {
+            try {
+                nextNumber = Integer.parseInt(latestEmployee.get().getBadgeNumber()) + 1;
+            } catch (NumberFormatException e) {
+                // If the badge number is not a valid number, start from 1000
+                nextNumber = 1000;
+            }
+        }
+
+        // Ensure the generated badge number is unique
+        while (employeeRepository.findByBadgeNumber(String.valueOf(nextNumber)).isPresent()) {
+            nextNumber++;
+        }
+
+        return String.valueOf(nextNumber);
+    }
+
+    public String generateBadgeNumber() {
+        Long maxId = employeeRepository.findMaxId().orElse(0L);
+        Long newBadgeNumber = maxId + 1;
+        return String.format("%05d", newBadgeNumber); // Format with leading zeros
+    }
+
+
 
     public List<Employee> getAllEmployees() {
         return employeeRepository.findByIsUnassignedFalse(); // Return only active employees

@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 import java.util.Map; // ✅ Fixed missing import
@@ -33,6 +35,15 @@ public class EmployeeController {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+
+    @GetMapping("/generate-badge")
+    public ResponseEntity<Map<String, String>> generateBadgeNumber() {
+        String badgeNumber = employeeService.generateBadgeNumber();
+        Map<String, String> response = new HashMap<>();
+        response.put("badgeNumber", badgeNumber);
+        return ResponseEntity.ok(response);
+    }
+
 
     @GetMapping
     public List<Employee> getAllEmployees() {
