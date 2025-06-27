@@ -3,6 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { GetLabel } from "../LanguageManager"; 
 import "./AddEmployeePage.css"; 
 import { BackButton } from "./BackButton";
+import { API_BASE_URL } from "../config";
 
 const AddEmployeePage = () => {
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ const AddEmployeePage = () => {
   useEffect(() => {
     const fetchBadgeNumber = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/employees/generate-badge");
+        const response = await fetch(`${API_BASE_URL}/api/employees/generate-badge`);//http://localhost:8080/api/employees/generate-badge
         if (response.ok) {
           const data = await response.json();
           setFormData((prevData) => ({
@@ -68,7 +69,7 @@ const AddEmployeePage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:8080/api/employees", {
+      const response = await fetch(`${API_BASE_URL}/api/employees`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

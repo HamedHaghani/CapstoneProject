@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { BackButton } from "./BackButton";
 import "./EmployeeSchedulePage.css";
+import { API_BASE_URL } from "../config"; // ✅ Import base URL
+
+const API_URL = `${API_BASE_URL}/api/schedules`; // ✅ Unified base for reuse
 
 const EmployeeSchedulePage = () => {
   const navigate = useNavigate();
@@ -26,16 +29,12 @@ const EmployeeSchedulePage = () => {
   useEffect(() => {
     const fetchSchedules = async () => {
       try {
-        const response = await fetch(
-          `http://localhost:8080/api/schedules/employee/${employeeId}`
-        );
+        const response = await fetch(`${API_URL}/employee/${employeeId}`);
         if (!response.ok) {
           throw new Error("Failed to fetch schedules");
         }
         const data = await response.json();
-        setSchedules(
-          data.sort((a, b) => a.startTime.localeCompare(b.startTime))
-        );
+        setSchedules(data.sort((a, b) => a.startTime.localeCompare(b.startTime)));
       } catch (error) {
         console.error(error);
       }
@@ -52,8 +51,8 @@ const EmployeeSchedulePage = () => {
     e.preventDefault();
 
     const url = editingScheduleId
-      ? `http://localhost:8080/api/schedules/${editingScheduleId}`
-      : `http://localhost:8080/api/schedules`;
+      ? `${API_URL}/${editingScheduleId}`
+      : `${API_URL}`;
     const method = editingScheduleId ? "PUT" : "POST";
 
     try {
@@ -104,12 +103,9 @@ const EmployeeSchedulePage = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(
-        `http://localhost:8080/api/schedules/${id}`,
-        {
-          method: "DELETE",
-        }
-      );
+      const response = await fetch(`${API_URL}/${id}`, {
+        method: "DELETE",
+      });
       if (!response.ok) {
         throw new Error("Failed to delete schedule");
       }
@@ -135,7 +131,7 @@ const EmployeeSchedulePage = () => {
       <div className="schedule-container">
         <div className="schedule-list">
           <input
-          className="schedule-search"
+            className="schedule-search"
             type="text"
             placeholder="Search schedules..."
             value={searchTerm}
@@ -228,13 +224,13 @@ const EmployeeSchedulePage = () => {
             </label>
 
             <label>
-              Details:{" "}
+              Details:
               <textarea
                 name="details"
                 value={formData.details}
                 onChange={handleChange}
                 required
-                rows="3" // More rows to make it bigger
+                rows="3"
               />
             </label>
 

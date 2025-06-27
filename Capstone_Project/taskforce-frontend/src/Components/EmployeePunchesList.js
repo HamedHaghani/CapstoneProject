@@ -1,25 +1,27 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { GetLabel } from "../LanguageManager"; // Import label manager
-import { BackButton } from "./BackButton"; // Import the BackButton
-import "./EmployeeListPage.css"; // CSS for styling
+import { GetLabel } from "../LanguageManager";
+import { BackButton } from "./BackButton";
+import "./EmployeeListPage.css";
+import { API_BASE_URL } from "../config"; // ✅ Import base URL
+
+const API_URL = `${API_BASE_URL}/api/employees`; // ✅ Base API path
 
 const EmployeePunchesList = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
   const culture = searchParams.get("culture") || "en";
-  const action = searchParams.get("action") || "view"; // Default to 'view'
+  const action = searchParams.get("action") || "view";
 
   const [employees, setEmployees] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [expandedEmployeeId, setExpandedEmployeeId] = useState(null);
 
-  // Fetch employees from API
   useEffect(() => {
     const fetchEmployees = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/employees");
+        const response = await fetch(`${API_URL}`);
         if (response.ok) {
           const data = await response.json();
           console.log("******Fetched Employees: ", data);
@@ -35,44 +37,35 @@ const EmployeePunchesList = () => {
     fetchEmployees();
   }, []);
 
-  // Filter employees by search query
   const filteredEmployees = employees.filter((employee) =>
     `${employee.name} ${employee.surname}`
       .toLowerCase()
       .includes(searchQuery.toLowerCase())
   );
 
-  // Toggle card expansion
   const toggleExpand = (id) => {
     setExpandedEmployeeId(expandedEmployeeId === id ? null : id);
   };
 
-  // Handle updating an employee
   const handleUpdate = (employee) => {
     navigate(`/update-employee?culture=${culture}&id=${employee.id}`);
   };
 
-  // Handle view payment of an employee
   const handlePayment = (employee) => {
     navigate(`/employee-punch?badge=${employee.badgeNumber}&culture=${culture}`);
   };
 
-  // Handle deleting an employee
   const handleDelete = async (employee) => {
     const confirmRemoval = window.confirm(
       GetLabel("Labels.pin.confirmRemoval", culture)
     );
     if (confirmRemoval) {
       try {
-        const response = await fetch(
-          `http://localhost:8080/api/employees/${employee.id}`,
-          {
-            method: "DELETE",
-          }
-        );
+        const response = await fetch(`${API_URL}/${employee.id}`, {
+          method: "DELETE",
+        });
         if (response.ok) {
           alert(`Employee ${employee.name} removed`);
-          // Refresh employees list after deletion
           setEmployees((prevEmployees) =>
             prevEmployees.filter((emp) => emp.id !== employee.id)
           );
@@ -85,21 +78,17 @@ const EmployeePunchesList = () => {
     }
   };
 
-  // Navigate back
   const handleBack = () => {
     navigate(`/manager?culture=${culture}`);
   };
 
-  // Handle managing schedules
   const handleManageSchedules = (employeeId) => {
     navigate(`/employee-schedule?employeeId=${employeeId}&culture=${culture}`);
   };
 
-    // Handle employee punches
-    const handlePunches = (employee) => {
-        navigate(`/employee-punch?badge=${employee.badgeNumber}&culture=${culture}`);
-        // navigate(`/employee-punch?culture=${culture}&id=${employee.id}`);
-      };
+  const handlePunches = (employee) => {
+    navigate(`/employee-punch?badge=${employee.badgeNumber}&culture=${culture}`);
+  };
 
   return (
     <div className="employee-list-page">
@@ -145,14 +134,13 @@ const EmployeePunchesList = () => {
                         </div>
                       )
                   )}
-                  {/* Conditionally render the action button */}
                   {action !== "view" && (
                     <div className="action-buttons">
                       {action === "update" && (
                         <button
                           className="action-button"
                           onClick={(e) => {
-                            e.stopPropagation(); // Prevent card toggle
+                            e.stopPropagation();
                             handleUpdate(employee);
                           }}
                         >
@@ -163,7 +151,7 @@ const EmployeePunchesList = () => {
                         <button
                           className="action-button"
                           onClick={(e) => {
-                            e.stopPropagation(); // Prevent card toggle
+                            e.stopPropagation();
                             handleDelete(employee);
                           }}
                         >
@@ -174,8 +162,8 @@ const EmployeePunchesList = () => {
                         <button
                           className="action-button"
                           onClick={(e) => {
-                            e.stopPropagation(); // Prevent card toggle
-                            handleManageSchedules(employee.id); // Pass employee id
+                            e.stopPropagation();
+                            handleManageSchedules(employee.id);
                           }}
                         >
                           {GetLabel("Labels.function.manageSchedules", culture)}
@@ -185,8 +173,8 @@ const EmployeePunchesList = () => {
                         <button
                           className="action-button"
                           onClick={(e) => {
-                            e.stopPropagation(); // Prevent card toggle
-                            handlePayment(employee); // Pass employee id
+                            e.stopPropagation();
+                            handlePayment(employee);
                           }}
                         >
                           {GetLabel("Labels.function.managePayment", culture)}
@@ -196,8 +184,8 @@ const EmployeePunchesList = () => {
                         <button
                           className="action-button"
                           onClick={(e) => {
-                            e.stopPropagation(); // Prevent card toggle
-                            handlePunches(employee); // Pass employee id
+                            e.stopPropagation();
+                            handlePunches(employee);
                           }}
                         >
                           {GetLabel("Labels.function.employeePunches", culture)}
@@ -217,5 +205,3 @@ const EmployeePunchesList = () => {
 };
 
 export default EmployeePunchesList;
-
-

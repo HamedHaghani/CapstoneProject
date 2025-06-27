@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import { GetLabel } from "../LanguageManager";
 import "./EmployeePaymentsPage.css";
+import { API_BASE_URL } from "../config"; // ✅ Import the base URL
 
-const API_URL = "http://localhost:8080/api/employees/payments/";
+const API_URL = `${API_BASE_URL}/api/employees/payments/`; // ✅ Use published URL
 
 const EmployeePaymentsPage = () => {
   const location = useLocation();

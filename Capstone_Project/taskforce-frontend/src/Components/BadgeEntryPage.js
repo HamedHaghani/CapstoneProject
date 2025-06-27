@@ -3,8 +3,12 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { GetLabel } from "../LanguageManager";
 import { BackButton } from "./BackButton";
 import "./BadgeEntryPage.css";
+import { API_BASE_URL } from "../config";
 
-const API_URL = "http://localhost:8080/api"; // Backend API base URL
+
+// const API_URL = "http://localhost:8080/api"; // Backend API base URL
+const API_URL = `${API_BASE_URL}/api`;
+
 
 const shiftActions = {
   startShift: "/shifts/start",

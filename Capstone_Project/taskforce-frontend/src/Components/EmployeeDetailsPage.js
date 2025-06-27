@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSearchParams } from "react-router-dom"; // Use useSearchParams instead of useParams
-import { GetLabel } from "../LanguageManager"; // Localization
-import { BackButton } from "./BackButton"; // Back navigation
-import "./EmployeeDetailsPage.css"; // Add styling
+import { useSearchParams } from "react-router-dom";
+import { GetLabel } from "../LanguageManager";
+import { BackButton } from "./BackButton";
+import "./EmployeeDetailsPage.css";
+import { API_BASE_URL } from "../config"; // ✅ Import the base URL
+
+const API_URL = `${API_BASE_URL}/api`; // ✅ Construct full API path
 
 const EmployeeDetailsPage = () => {
   const navigate = useNavigate();
@@ -11,9 +14,9 @@ const EmployeeDetailsPage = () => {
     navigate(`/`);
   };
 
-  const [searchParams] = useSearchParams(); // Extract query parameters
-  const badge = searchParams.get("badge"); // Get the 'badge' query parameter
-  const culture = searchParams.get("culture"); // Get the 'culture' query parameter
+  const [searchParams] = useSearchParams();
+  const badge = searchParams.get("badge");
+  const culture = searchParams.get("culture");
 
   const [formData, setFormData] = useState({
     jobTitle: "",
@@ -35,7 +38,7 @@ const EmployeeDetailsPage = () => {
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [notFound, setNotFound] = useState(false); // New state to track if employee is not found
+  const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
     const fetchEmployeeData = async () => {
@@ -46,12 +49,10 @@ const EmployeeDetailsPage = () => {
       }
 
       try {
-        const response = await fetch(
-          `http://localhost:8080/api/employees/badge/${badge}`
-        );
+        const response = await fetch(`${API_URL}/employees/badge/${badge}`);
 
         if (response.status === 404) {
-          setNotFound(true); // Set employee not found
+          setNotFound(true);
           setLoading(false);
           return;
         }

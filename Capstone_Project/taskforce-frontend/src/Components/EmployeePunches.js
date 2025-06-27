@@ -3,8 +3,9 @@ import { GetLabel } from "../LanguageManager";
 import { BackButton } from "./BackButton";
 import { useNavigate, useLocation } from "react-router-dom";
 import "./EmployeePunches.css";
+import { API_BASE_URL } from "../config"; // ✅ Import base URL
 
-const API_URL = "http://localhost:8080/api/shifts/employee/";
+const API_URL = `${API_BASE_URL}/api/shifts/employee/`; // ✅ Use published endpoint
 
 const EmployeeSPunches = () => {
   const navigate = useNavigate();
@@ -47,10 +48,10 @@ const EmployeeSPunches = () => {
   return (
     <div className="shifts-container">
       <h2>{GetLabel("Labels.function.employeePunches")}</h2>
-      
+
       {error && <div className="error-message">{error}</div>}
       {loading && <div className="loading">Loading...</div>}
-      
+
       {shifts.length > 0 ? (
         <table className="shifts-table">
           <thead>
@@ -78,10 +79,10 @@ const EmployeeSPunches = () => {
         <p>No shifts available.</p>
       )}
 
-       <BackButton
-              handleBackButton={handleBackButton}
-              currentCulture={culture}
-            />
+      <BackButton
+        handleBackButton={handleBackButton}
+        currentCulture={culture}
+      />
     </div>
   );
 };

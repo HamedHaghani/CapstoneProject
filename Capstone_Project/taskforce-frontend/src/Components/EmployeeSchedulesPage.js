@@ -4,6 +4,9 @@ import { useSearchParams } from "react-router-dom";
 import { GetLabel } from "../LanguageManager";
 import { BackButton } from "./BackButton";
 import "./EmployeeSchedulesPage.css";
+import { API_BASE_URL } from "../config"; // ✅ Import base URL
+
+const API_URL = `${API_BASE_URL}/api/schedules/employee`; // ✅ Base API path
 
 const EmployeeSchedulesPage = () => {
   const navigate = useNavigate();
@@ -29,9 +32,7 @@ const EmployeeSchedulesPage = () => {
       }
 
       try {
-        const response = await fetch(
-          `http://localhost:8080/api/schedules/employee/${badge}/schedules`
-        );
+        const response = await fetch(`${API_URL}/${badge}/schedules`);
 
         if (response.status === 404) {
           setNotFound(true);

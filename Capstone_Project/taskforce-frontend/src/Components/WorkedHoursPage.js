@@ -4,6 +4,8 @@ import { GetLabel } from "../LanguageManager";
 import { BackButton } from "./BackButton";
 import "./WorkedHoursPage.css";
 
+const API_BASE_URL = "https://taskforce-backend.onrender.com/api";
+
 const WorkedHoursPage = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -18,7 +20,7 @@ const WorkedHoursPage = () => {
   useEffect(() => {
     const fetchPayPeriods = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/configuration/payperiods");
+        const response = await fetch(`${API_BASE_URL}/configuration/payperiods`);
         if (response.ok) {
           const data = await response.json();
           setPayPeriods(data);
@@ -43,7 +45,7 @@ const WorkedHoursPage = () => {
     const fetchEmployeeHours = async () => {
       try {
         const response = await fetch(
-          `http://localhost:8080/api/employees/hours/${selectedPayPeriod}`
+          `${API_BASE_URL}/employees/hours/${selectedPayPeriod}`
         );
         if (response.ok) {
           const data = await response.json();

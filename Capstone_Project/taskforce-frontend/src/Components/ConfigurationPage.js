@@ -3,6 +3,9 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { GetLabel } from "../LanguageManager";
 import "./ConfigurationPage.css";
 import { BackButton } from "./BackButton";
+import { API_BASE_URL } from "../config"; // ✅ Import global base URL
+
+const API_URL = `${API_BASE_URL}/api`; // ✅ Construct full API base path
 
 const ConfigurationPage = () => {
   const navigate = useNavigate();
@@ -16,13 +19,13 @@ const ConfigurationPage = () => {
     minutesBeforeShift: 0,
     adminPassword: "",
     isAdminPasswordChanged: false,
-    taxPercentage: "", // New taxRate field
+    taxPercentage: "",
   });
 
   useEffect(() => {
     const fetchConfig = async () => {
       try {
-        const response = await fetch("http://localhost:8080/api/configuration");
+        const response = await fetch(`${API_URL}/configuration`);
         if (response.ok) {
           const data = await response.json();
           setConfigData(data);
@@ -45,7 +48,6 @@ const ConfigurationPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Ensure the taxRate is between 0 and 1
     if (configData.taxPercentage === "" || configData.taxPercentage < 0 || configData.taxPercentage > 1) {
       alert("Tax rate must be between 0 and 1!");
       return;
@@ -55,18 +57,14 @@ const ConfigurationPage = () => {
       ...configData,
       payPeriodStartDate: configData.payPeriodStartDate
         ? new Date(configData.payPeriodStartDate).toISOString().split("T")[0]
-        : "", // Ensures correct format
-        taxPercentage: parseFloat(configData.taxPercentage), // Ensure taxRate is a number
+        : "",
+      taxPercentage: parseFloat(configData.taxPercentage),
     };
 
-    console.log("Submitting data:", formattedData);
-
     try {
-      const response = await fetch("http://localhost:8080/api/configuration/save", {
+      const response = await fetch(`${API_URL}/configuration/save`, {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formattedData),
       });
 
@@ -115,7 +113,6 @@ const ConfigurationPage = () => {
           </select>
         </label>
 
-        {/* Updated Tax Rate Field */}
         <label>
           {GetLabel("Labels.form.taxRate", currentCulture)}
           <input
