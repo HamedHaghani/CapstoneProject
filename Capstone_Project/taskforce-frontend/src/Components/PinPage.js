@@ -3,9 +3,8 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { GetLabel } from "../LanguageManager"; // Import GetLabel function
 import { BackButton } from "./BackButton";
 import "./PinPage.css"; // Your CSS for styling
-import {
-  FaArrowLeft, // Back arrow icon
-} from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa"; // Back arrow icon (if used elsewhere)
+
 const PinPage = () => {
   const [pin, setPin] = useState("");
   const [currentCulture, setCurrentCulture] = useState("en"); // Default to 'en' (English)
@@ -32,9 +31,9 @@ const PinPage = () => {
   const handleSubmit = () => {
     if (pin === "1234") {
       // Correct PIN - navigate to manager page
-      navigate(`/manager?culture=${currentCulture}`); // Include current language in the URL
+      navigate(`/manager?culture=${currentCulture}`);
     } else {
-      alert(GetLabel("Labels.pin.incorrectPin", currentCulture)); // Use GetLabel for incorrect PIN message
+      alert(GetLabel("Labels.pin.incorrectPin", currentCulture)); // Incorrect PIN alert
     }
   };
 
@@ -45,6 +44,9 @@ const PinPage = () => {
   return (
     <div className="pin-page">
       <h2>{GetLabel("Labels.pin.enterPin", currentCulture)}</h2>
+
+      {/* ✅ Show Manager Pass Code */}
+      <p className="manager-pass">Manager Pass: <strong>1234</strong></p>
 
       {/* PIN input display */}
       <div className="pin-display">{pin}</div>
@@ -63,15 +65,14 @@ const PinPage = () => {
 
         {/* Delete button */}
         <button onClick={handleDelete} className="delete-btn">
-          &#9003; {/* Unicode for delete/backspace */}
+          &#9003;
         </button>
       </div>
 
       {/* Submit and Back buttons */}
       <div className="action-buttons">
         <button className="submit-btn" onClick={handleSubmit}>
-          {GetLabel("Labels.button.submit", currentCulture)}{" "}
-          {/* Use GetLabel for submit button */}
+          {GetLabel("Labels.button.submit", currentCulture)}
         </button>
         <BackButton
           handleBackButton={handleBackButton}
