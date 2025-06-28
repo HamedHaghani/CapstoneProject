@@ -16,6 +16,7 @@ import java.util.Map; // ✅ Fixed missing import
 
 @RestController
 @RequestMapping("/api/employees")
+@CrossOrigin(origins = "*")
 public class EmployeeController {
     private final EmployeeService employeeService;
 
