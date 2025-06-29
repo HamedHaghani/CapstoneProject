@@ -139,10 +139,17 @@
     padding: 8px 18px; /* Slightly smaller padding on smaller screens */
   }
   @media (max-width: 768px) {
+  .main-page {
+    height: auto; /* Let the page grow as needed */
+    min-height: 100vh;
+    overflow-y: auto; /* Enable vertical scrolling */
+    padding-bottom: 120px; /* Prevent overlap with fixed buttons */
+  }
+
   .row {
-    flex-direction: column; /* Stack buttons vertically */
+    flex-direction: column;
     align-items: center;
-    gap: 20px; /* Reduce gap */
+    gap: 20px;
   }
 
   .title {
@@ -150,21 +157,31 @@
     text-align: center;
   }
 
-  .button-container {
-    gap: 20px;
-    padding-top: 1rem;
-  }
-
   .top-bar {
     flex-direction: column;
     gap: 10px;
   }
 
+  .button-container {
+    gap: 20px;
+    padding-top: 1rem;
+    width: 100%;
+  }
+
   .manager-button {
+    position: absolute; /* Switch from fixed to avoid overlap */
+    bottom: 90px;
+    left: 10px;
     font-size: 1rem;
     padding: 10px 15px;
-    bottom: 70px; /* Avoid overlapping with language picker */
-    left: 10px;
+    z-index: 10;
+  }
+
+  .language-toggle {
+    position: absolute;
+    bottom: 20px;
+    right: 10px;
+    z-index: 10;
   }
 }
 
