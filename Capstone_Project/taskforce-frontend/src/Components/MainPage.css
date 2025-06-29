@@ -138,4 +138,34 @@
   .manager-button {
     padding: 8px 18px; /* Slightly smaller padding on smaller screens */
   }
+  @media (max-width: 768px) {
+  .row {
+    flex-direction: column; /* Stack buttons vertically */
+    align-items: center;
+    gap: 20px; /* Reduce gap */
+  }
+
+  .title {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .button-container {
+    gap: 20px;
+    padding-top: 1rem;
+  }
+
+  .top-bar {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .manager-button {
+    font-size: 1rem;
+    padding: 10px 15px;
+    bottom: 70px; /* Avoid overlapping with language picker */
+    left: 10px;
+  }
+}
+
 }
