@@ -1,18 +1,24 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { GetLabel } from "../LanguageManager";
 import "./EmployeePaymentsPage.css";
 import { API_BASE_URL } from "../config"; // ✅ Import the base URL
+import { BackButton } from "./BackButton"; // ✅ Import BackButton
 
 const API_URL = `${API_BASE_URL}/api/employees/payments/`; // ✅ Use published URL
 
 const EmployeePaymentsPage = () => {
   const location = useLocation();
+  const navigate = useNavigate();
   const searchParams = new URLSearchParams(location.search);
   const badgeNumber = searchParams.get("badge");
 
   const [paymentData, setPaymentData] = useState(null);
   const [error, setError] = useState(null);
+
+  const handleBack = () => {
+    navigate("/");
+  };
 
   useEffect(() => {
     if (!badgeNumber) {
@@ -50,6 +56,8 @@ const EmployeePaymentsPage = () => {
       <p><strong>Gross Earnings:</strong> ${paymentData.grossEarnings.toFixed(2)}</p>
       <p><strong>Tax Deductions:</strong> ${paymentData.taxDeductions.toFixed(2)}</p>
       <p><strong>Net Pay:</strong> ${paymentData.netPay.toFixed(2)}</p>
+
+      <BackButton handleBackButton={handleBack} />
     </div>
   );
 };
