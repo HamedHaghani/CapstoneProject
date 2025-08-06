@@ -111,7 +111,17 @@ const BadgeEntryPage = () => {
         {GetLabel("Labels.function.submitBadge", currentCulture)}
       </button>
 
-      <BackButton handleBackButton={() => navigate("/")} currentCulture={currentCulture} />
+      <BackButton
+  handleBackButton={() => {
+    if (window.history.length > 2) {
+      navigate(-1); // Go back if there's history
+    } else {
+      navigate("/main"); // Fallback if no real history
+    }
+  }}
+  currentCulture={currentCulture}
+/>
+
     </div>
   );
 };

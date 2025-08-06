@@ -20,10 +20,15 @@ import ManageEmployeePaymentView from "./Components/ManageEmployeePaymentView";
 import ConfigPage from "./Components/ConfigurationPage";
 import EmployeePunchesList from "./Components/EmployeePunchesList"
 import EmployeePunches from "./Components/EmployeePunches"
+import IntroPage from "./Components/IntroPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <IntroPage />,
+  },
+  {
+    path:"/main",
     element: <MainPage />,
   },
   {
