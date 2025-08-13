@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./MainPage.css";
 import CircleButton from "./CircleButton";
-import LanguagePicker from "./LanguagePicker"; // Import the LanguagePicker
+import LanguagePicker from "./LanguagePicker";
+import HelpButton from "./HelpButton";
 import { GetLabel } from "../LanguageManager";
-import HelpButton from "./HelpButton"; // Import the HelpButton
-
+import { useNavigate } from "react-router-dom";
 import {
   FaClock,
   FaUser,
@@ -13,11 +13,19 @@ import {
   FaPause,
   FaPlay,
 } from "react-icons/fa";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
 
 const MainPage = () => {
-  const [currentCulture, setCurrentCulture] = useState("en"); // State for current language
-  const navigate = useNavigate(); // Initialize navigate
+  const [currentCulture, setCurrentCulture] = useState("en");
+  const [showPopup, setShowPopup] = useState(false); 
+  const navigate = useNavigate();
+
+  useEffect(() => {
+  const timer = setTimeout(() => {
+    setShowPopup(true); // Show the popup after 2 seconds
+  }, 2000);
+
+  return () => clearTimeout(timer); // Cleanup if component unmounts early
+}, []);
 
   const actions = [
     {
@@ -40,7 +48,6 @@ const MainPage = () => {
       icon: <FaClock />,
       route: `/badge-entry?action=endBreak&culture=${currentCulture}`,
     },
-
     {
       name: "Labels.function.viewPayments",
       icon: <FaMoneyBill />,
@@ -59,23 +66,36 @@ const MainPage = () => {
   ];
 
   const handleLanguageChange = (newCulture) => {
-    setCurrentCulture(newCulture); // Update state when language changes
+    setCurrentCulture(newCulture);
   };
 
   const handleManagerRedirect = () => {
-    // Pass the current culture as a query parameter when navigating to the PinPage
-    navigate(`/pin?culture=${currentCulture}`); // Navigate with culture parameter
+    navigate(`/pin?culture=${currentCulture}`);
+  };
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
   };
 
   return (
     <div className="main-page">
       <h1 className="title">TaskForce</h1>
 
-      {/* Top Bar with Language Picker and Manager Button */}
-      <div className="top-bar">
-        {/* Use the LanguagePicker component */}
+      {/* 🚨 Popup Box */}
+      {showPopup && (
+        <div className="popup-overlay">
+          <div className="popup-box">
+            <h2>📢 Welcome to TaskForce!</h2>
+            <p>
+  To use this app, you'll need a valid employee badge number. You can create new employees via the Manager Panel or use existing ones. Don’t forget to assign a schedule to each employee — without one, they won’t be able to start a shift.
+</p>
+            <button className="popup-close" onClick={handleClosePopup}>Close</button>
+          </div>
+        </div>
+      )}
 
-        {/* Manager Button */}
+      {/* Top Bar */}
+      <div className="top-bar">
         <button className="manager-button" onClick={handleManagerRedirect}>
           {GetLabel("Labels.function.manager", currentCulture)}
         </button>
@@ -94,7 +114,7 @@ const MainPage = () => {
               key={index}
               icon={action.icon}
               label={GetLabel(action.name, currentCulture)}
-              onClick={() => navigate(`${action.route}`)}
+              onClick={() => navigate(action.route)}
             />
           ))}
         </div>
@@ -104,7 +124,7 @@ const MainPage = () => {
               key={index}
               icon={action.icon}
               label={GetLabel(action.name, currentCulture)}
-              onClick={() => navigate(`${action.route}`)}
+              onClick={() => navigate(action.route)}
             />
           ))}
         </div>
