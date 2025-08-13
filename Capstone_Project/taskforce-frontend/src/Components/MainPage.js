@@ -22,7 +22,7 @@ const MainPage = () => {
   useEffect(() => {
   const timer = setTimeout(() => {
     setShowPopup(true); // Show the popup after 2 seconds
-  }, 2000);
+  }, 1000);
 
   return () => clearTimeout(timer); // Cleanup if component unmounts early
 }, []);
